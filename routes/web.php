@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('hobbies');
 });
+
+Route::get('/hobbies/{name}',function(){
+    return redirect('/');
+})->where('name','[A-Za-z]+');
+
+Route::resource('hobbies','HobbiesController');
+
+Route::post('getData','HobbiesController@getData');
