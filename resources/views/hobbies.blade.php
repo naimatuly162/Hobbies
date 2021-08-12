@@ -10,9 +10,8 @@
 <div id="app">
 
     <Myheader></Myheader>
-    <div>
+    <div class="container">
     <router-view></router-view>
-
     </div>
     <Myfooter></Myfooter>
 
@@ -20,11 +19,3 @@
 <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>
-
-
-<script>
-
-    export default {
-
-    }
-</script>

@@ -27,4 +27,6 @@ Route::get('/', [HobbiesController::class, 'index']);
 
 Route::post('getData',[HobbiesController::class,'getData']);
 
+Route::resource('hobbies',HobbiesController::class);
+
 
