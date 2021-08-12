@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+
+use App\Http\Requests\HobbiesRequest;
 use App\Models\Hobbies;
 use Illuminate\Http\Request;
 
@@ -15,6 +18,12 @@ class HobbiesController extends Controller
     public function index()
     {
         return view('hobbies');
+    }
+
+    public function getData(){
+
+        return Hobbies::orderBy('name','ASC')->get();
+
     }
 
     /**
@@ -33,9 +42,16 @@ class HobbiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HobbiesRequest $request)
+
     {
-        //
+        $pb =new Hobbies;
+        $pb->name = $request->name;
+        $pb->user_name = $request->user_name;
+        $pb->email = $request->email;
+        $pb->save();
+        return  $pb;
+
     }
 
     /**

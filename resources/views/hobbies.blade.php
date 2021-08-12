@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <title>HobbiesApp</title>
 
 </head>
@@ -11,6 +12,7 @@
     <Myheader></Myheader>
     <div>
     <router-view></router-view>
+
     </div>
     <Myfooter></Myfooter>
 
@@ -20,3 +22,9 @@
 </html>
 
 
+<script>
+
+    export default {
+
+    }
+</script>

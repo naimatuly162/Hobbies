@@ -3,7 +3,7 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title ">Add New Contact</p>
+                <p class="modal-card-title ">Add New User</p>
                 <button class="delete" aria-label="close" @click='close'></button>
             </header>
             <section class="modal-card-body">
@@ -31,18 +31,7 @@
           </span>
                     </div>
                     <small class="has-text-danger"  v-if="errors.user_name">{{errors.user_name[0]}}</small>
-                </div>
 
-
-                <div class="field">
-                    <label class="label">Hobbies</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input is-success" :class="{'is-danger':errors.hobby}" type="text"  placeholder="hobbies"v-model="list.hobby" >
-                        <span class="icon is-small is-left">
-            <i class="fa fa-user-square"></i>
-          </span>
-                        <small class="has-text-danger"  v-if="errors.hobbies">{{errors.hobby[0]}}</small>
-                    </div>
 
                     <div class="field">
                         <label class="label">Email</label>
@@ -67,26 +56,32 @@
 </template>
 <script>
 export default{
+
     props:['openmodal'],
     data(){
         return{
             list:{
                 name:'',
                 user_name:'',
-                hobby:'',
                 email:''
             },
             errors:{}
         }
+
     },
     methods:{
         close(){
             this.$emit('closeRequest')
         },
+        customLabel (option) {
+            return `${option.library} - ${option.language}`
+        },
         save(){
-            axios.post('/hobbies',this.$data.list).then((response)=>this.close())
+            axios.post('/',this.$data.list).then((response)=>this.close())
                 .catch((error)=> this.errors= error.response.data.errors )
         },
     }
 }
 </script>
+
+)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HobbiesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('hobbies');
-});
+
+
 
 Route::get('/hobbies/{name}',function(){
     return redirect('/');
 })->where('name','[A-Za-z]+');
 
-Route::resource('hobbies','HobbiesController');
 
-Route::post('getData','HobbiesController@getData');
+
+Route::get('/', [HobbiesController::class, 'index']);
+
+Route::post('getData',[HobbiesController::class,'getData']);
+
+

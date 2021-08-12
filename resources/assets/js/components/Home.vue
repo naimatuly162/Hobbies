@@ -2,9 +2,9 @@
     <div>
         <nav class="panel column is-offset-2 is-8" >
             <p class="panel-heading">
-                My PhoneBook
+                My Hobbies
                 <button class="button is-info is-outlined" @click="openAdd">
-                    Add New</button>
+                    Add New </button>
             </p>
 
             <div class="panel-block">
@@ -12,10 +12,7 @@
                     <input class="input is-primary" type="text" placeholder="Search">
                     <span class="icon is-left">
         <i class="fas fa-search" aria-hidden="true"></i>
-      </span>
-                </p>
-            </div>
-
+      </span></p></div>
 
             <a class="panel-block" v-for="item in lists">
     <span class="column is-9">
@@ -33,14 +30,15 @@
             </a>
         </nav>
 
-        <Add :openmodal='addActive' @closeRequest='close' ></Add>
-        <Show :openmodal='showActive' @closeRequest='close' ></Show>
+        <Add :openmodal='addActive' @closeRequest='close'> </Add>
+
 
     </div>
 </template>
 <script>
 let Add =require('./Add.vue').default;
 let Show=require('./Show.vue').default;
+
 export default {
     components: {Add,Show},
 
@@ -65,7 +63,7 @@ export default {
             this.showActive = 'is-active';
         },
         close(){
-            this.addActive= this.showActive='';
+            this.addActive= '';
         },
     }
 }
