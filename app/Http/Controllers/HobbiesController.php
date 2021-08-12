@@ -20,10 +20,9 @@ class HobbiesController extends Controller
         return view('hobbies');
     }
 
-    public function getData(){
-
+    public function getData()
+    {
         return Hobbies::orderBy('name','ASC')->get();
-
     }
 
     /**
@@ -50,7 +49,7 @@ class HobbiesController extends Controller
         $pb->user_name = $request->user_name;
         $pb->email = $request->email;
         $pb->save();
-        return  $pb;
+        return $pb;
 
     }
 
@@ -83,9 +82,13 @@ class HobbiesController extends Controller
      * @param  \App\Models\Hobbies  $hobbies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hobbies $hobbies)
+    public function update(HobbiesRequest $request)
     {
-        //
+        $pb = Hobbies::find($request->id);
+        $pb->name = $request->name;
+        $pb->user_name = $request->user_name;
+        $pb->email = $request->email;
+        $pb->save();
     }
 
     /**
@@ -96,6 +99,6 @@ class HobbiesController extends Controller
      */
     public function destroy(Hobbies $hobbies)
     {
-        //
+        Hobbies::where('id',$hobbies->id)->delete();
     }
 }
