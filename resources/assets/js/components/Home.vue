@@ -20,16 +20,20 @@
        {{item.name}}
     </span>
                 <span class="panel-icon column is-1">
-      <i class="has-text-danger fa fa-trash" aria-hidden="true" @click="del(key,item.id)"></i>
+      <i class="has-text-danger fa fa-trash" aria-hidden="true" @click="del(key,(item.id))"></i>
     </span>
                 <span class="panel-icon column is-1">
-      <i class="has-text-info fa fa-edit" aria-hidden="true" @click="openEdit(key)"></i>
+      <i class="has-text-info fa fa-edit" aria-hidden="true" @click='openEdit(key,item.id)'></i>
     </span>
                 <span class="panel-icon column is-1">
       <i class="has-text-primary fa fa-eye" aria-hidden="true" @click="openDisplay(key)"></i>
     </span>
             </a>
             <a>
+
+<!--                <pagiantion :data="lists" @pagination-change-page="getData"></pagiantion>-->
+
+
             <div class="pagination" role="navigation" aria-label="pagination" style="margin-top: 5px">
                 <a class="pagination-previous" title="This is the first page" disabled>Previous</a>
                 <a class="pagination-next">Next page</a>
@@ -45,9 +49,10 @@
                     </li>
                 </ul>
             </div>
-            </a>
-        </nav>
 
+            </a>
+
+        </nav>
 
         <Add :openmodal='addActive' @closeRequest='close'> </Add>
         <Display :openmodal='displayActive' @closeRequest='close'></Display>
@@ -73,13 +78,13 @@ export default {
             loading:false,
             searchQuery:'',
             temp:'',
-            list:''
+
         }
     },
     mounted(){
         axios.post('/getData')
-            .then((response)=>this.lists=response.data)
-            .catch((error)=> this.errors= error.response.data.errors )
+            .then((response)=>this.lists = this.temp =response.data)
+            .catch((error)=> this.errors = error.response.data.errors)
     },
     watch:{
         searchQuery(){
@@ -87,6 +92,7 @@ export default {
                 this.temp = this.lists.filter((item) => {
                     return Object.keys(item).some((key)=>{
                         let string = String(item[key])
+                        //console.log(string)
                         return string.toLowerCase().indexOf(this.searchQuery.toLowerCase())>-1
                         // console.log(string)
                     })
@@ -101,25 +107,48 @@ export default {
             this.addActive='is-active';
         },
         openDisplay(key){
-            this.$children[1].list=this.temp[key]
+            this.$children[1].list= this.temp[key]
             this.displayActive='is-active';
         },
-        openEdit(key){
-            this.$children[2].list = this.temp[key]
-            this.editActive = 'is-active';
+
+         openEdit(key){
+             // console.log(this.$children);
+             let obj= this.temp[key]
+           // console.log(obj.hobby);
+             obj.hobby= JSON.parse(obj.hobby)
+
+             console.log(obj)
+             this.$children[2].list = obj ;
+             this.editActive = 'is-active';
         },
         close(){
             this.addActive= this.displayActive=this.editActive='';
         },
+
         del(key,id){
             if (confirm("Are you sure ?")) {
-                this.loading = !this.loading
+
                 axios.delete(`/hobbies/${id}`)
-                    .then((response)=> {this.lists.splice(key,1);this.loading = !this.loading})
+                    .then((response)=> {
+                        this.lists.splice(key, 1)
+                    })
                     .catch((error) => this.errors = error.response.data.errors)
+
             }
             console.log(`${key} ${id}`)
-        }
+        },
+       /* getData(page){
+            if(typeof page=== 'undefined'){
+                page=1;
+            }
+            this.$http.get('/api/hobbies?page=' + page)
+            .then((response) =>{
+                return response.json();
+            }).then(data => {
+                this.lists = data;
+            });
+        }*/
+
     }
 }
 </script>

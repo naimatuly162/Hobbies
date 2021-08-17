@@ -1,11 +1,16 @@
 <template>
-    <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color: rgba(217,245,228,0.95)">
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" ><b>HOBBIES APP</b></a>
+            <a class="navbar-item" href="https://bulma.io">
+
+            </a>
+
             <div class="navbar-menu is-active">
-                <router-link to="/home" class="navbar-item"><b>Home</b></router-link>
-                <router-link to="/about" class="navbar-item"><b>About</b></router-link>
+                <router-link to="/home" class="navbar-item">Home</router-link>
+                <router-link to="/about" class="navbar-item">About</router-link>
             </div>
+
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -15,3 +20,8 @@
     </nav>
 </template>
 
+<script>
+export default {
+
+}
+</script>

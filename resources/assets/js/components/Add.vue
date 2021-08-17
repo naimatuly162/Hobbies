@@ -7,7 +7,6 @@
                 <button class="delete" aria-label="close" @click='close'></button>
             </header>
             <section class="modal-card-body">
-
                 <!-- Content ... -->
                 <div class="field">
 
@@ -38,11 +37,36 @@
                         <div class="control has-icons-left has-icons-right">
                             <input class="input is-danger" :class="{'is-danger':errors.email}" type="email" placeholder="Email" value="hello@" v-model="list.email">
                             <span class="icon is-small is-left">
-      <i class="fa fa-envelope"></i>
-    </span>
+                 <i class="fa fa-envelope"></i>
+                     </span>
                         </div>
                         <small class="has-text-danger"  v-if="errors.email">{{errors.email[0]}}</small>
                     </div>
+
+                <div class="field">
+                    <label class="label">Hobby</label>
+
+                    <div class="control" >
+                        <input type="checkbox" value="music" id="music" v-model="list.hobby">
+                        <label for="music">Music</label>
+
+                        <input type="checkbox" value="planting" id="planting" v-model="list.hobby">
+                        <label for="planting">Planting</label>
+
+                        <input type="checkbox" value="travelling" id="travel" v-model="list.hobby">
+                        <label for="travel">Travelling</label>
+
+                        <input type="checkbox" value="photography" id="photography" v-model="list.hobby">
+                        <label for="photography">Photography</label>
+
+                        <input type="checkbox" value="singing" id="singing" v-model="list.hobby">
+                        <label for="singing">Singing</label>
+
+                        <input type="checkbox" value="painting" id="painting" v-model="list.hobby">
+                        <label for="painting">Painting</label>
+                </div>
+
+                </div>
                 </div>
 
                 <!--EndContent -->
@@ -55,16 +79,19 @@
     </div>
 </template>
 <script>
+
 export default{
 
     props:['openmodal'],
     data(){
         return{
+
             list:{
                 name:'',
                 user_name:'',
                 email:'',
-                hobby:''
+                hobby:[],
+
             },
             errors:{}
         }
@@ -74,15 +101,28 @@ export default{
         close(){
             this.$emit('closeRequest')
         },
-        customLabel (option) {
-            return `${option.library} - ${option.language}`
-        },
+
         save(){
-            axios.post('/hobbies',this.$data.list).then((response)=>this.close())
-                .catch((error)=> this.errors= error.response.data.errors )
+            axios.post('/hobbies',this.$data.list)
+                .then((response )=>  {
+                    console.log(response);
+                    this.close()
+
+               /* this.$parent.lists.push(response.data)
+                    this.$parent.lists.sort(function (a,b){
+                        if(a.name>b.name){
+                            return 1;
+                        }else if (a.name<b.name){
+                            return -1;
+                        }
+                    })
+                    this.list =""*/
+                })
+                .catch((error)=> this.errors= error.response.data.errors)
         },
+
+
     }
 }
 </script>
 
-)

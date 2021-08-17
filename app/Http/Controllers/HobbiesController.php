@@ -19,10 +19,10 @@ class HobbiesController extends Controller
     {
         return view('hobbies');
     }
-
     public function getData()
     {
-        return Hobbies::orderBy('name','ASC')->get();
+        $hobbies = Hobbies::orderBy('name','ASC')->get();
+        return $hobbies;
     }
 
     /**
@@ -41,13 +41,15 @@ class HobbiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(HobbiesRequest $request)
 
+    public function store(HobbiesRequest $request)
     {
+        //return $request->all();
         $pb =new Hobbies;
         $pb->name = $request->name;
         $pb->user_name = $request->user_name;
         $pb->email = $request->email;
+        $pb->hobby = json_encode($request->hobby);
         $pb->save();
         return $pb;
 
@@ -84,13 +86,14 @@ class HobbiesController extends Controller
      */
     public function update(HobbiesRequest $request)
     {
+       // return $request->all();
         $pb = Hobbies::find($request->id);
         $pb->name = $request->name;
         $pb->user_name = $request->user_name;
         $pb->email = $request->email;
+        $pb->hobby= json_encode($request->hobby);
         $pb->save();
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -99,6 +102,7 @@ class HobbiesController extends Controller
      */
     public function destroy(Hobbies $hobbies)
     {
-        Hobbies::where('id',$hobbies->id)->delete();
+       $pb= Hobbies::where('id',$hobbies->id)->delete();
+        return $pb;
     }
 }

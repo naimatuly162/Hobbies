@@ -14,9 +14,6 @@
                     <label class="label">Name</label>
                     <div class="control has-icons-left has-icons-right">
                         <p>{{list.name}}</p>
-                        <span class="icon is-small is-left">
-            <i class="fa fa-user"></i>
-          </span>
                     </div>
                 </div>
 
@@ -24,33 +21,23 @@
                     <label class="label">User Name</label>
                     <div class="control has-icons-left has-icons-right">
                        <p>{{list.user_name}}</p>
-                        <span class="icon is-small is-left">
-            <i class="fa fa-phone-square"></i>
-          </span>
-                    </div>
+                  </div>
 
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control has-icons-left has-icons-right">
                            <p>{{list.email}}</p>
-                            <span class="icon is-small is-left">
-      <i class="fa fa-envelope"></i>
-    </span>
                         </div>
                     </div>
+
                     <div class="field">
                         <label class="label">Hobby</label>
                         <div class="control has-icons-left has-icons-right">
                             <p>{{list.hobby}}</p>
-                            <span class="icon is-small is-left">
-             <i class="fa fa-envelope"></i>
-    </span>
                         </div>
                     </div>
-
                 </div>
 
-                <!--EndContent -->
             </section>
             <footer class="modal-card-foot">
                 <button class="button" @click='close'>Cancel</button>

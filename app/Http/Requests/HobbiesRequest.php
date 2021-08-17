@@ -26,7 +26,8 @@ class HobbiesRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'user_name'=> 'required|max:10',
-            'email'=> 'required|email'
+            'email'=> 'required|email',
+            'hobby' => 'required|max:255'
         ];
     }
 }
